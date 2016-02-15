@@ -26,3 +26,11 @@
 *.exe
 *.out
 *.app
+build
+
+*.swp
+*.swm
+*.swn
+*.swo
+*.png
+.*.un~
