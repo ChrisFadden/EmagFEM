@@ -4,55 +4,89 @@
 
 Grid::Grid() {
   sizeX = 4;
-  sizeY = 4;
+  sizeY = 3;
 }
 
 Grid::Grid(std::string filename) {
   sizeX = 4;
-  sizeY = 4;
+  sizeY = 3;
   std::string notUsed = filename;
 }
 
 void Grid::Mesh() {
+  meshNodes();
+  meshElements();
+}  // end Mesh func
+
+void Grid::meshNodes() {
   // Create Node Pairs
-  double x, y;
   nodePairs.resize(sizeX * sizeY);
 
   int node = 0;
 
   for (int j = 0; j < sizeY; j++) {
-    y = (double)j / (sizeY);
     for (int i = 0; i < sizeX; i++) {
-      x = (double)i / (sizeX);
-      nodePairs[node].first = x;
-      nodePairs[node].second = y;
+      nodePairs[node].first = i;
+      nodePairs[node].second = j;
       node++;
     }  // end sizeY
-  }  // end sizeX
+  }    // end sizeX
 
-  // Create Triangles (Check if I subtracted 1 correctly...)
-  arma::mat tmpMatrix1, tmpMatrix3;
-  arma::vec tmpVec1, tmpVec2;
+}  // end meshNodes function
 
-  // X vertices
-  tmpMatrix1 << 1 << 2 << sizeX + 2 << arma::endr << 1 << sizeX + 2 << sizeX+1
-             << arma::endr;
-  tmpVec1.ones(sizeX - 1);
+void Grid::meshElements() {
+  // Assumes column major indexing (node # increase along x-axis)
+  elements.reserve(sizeX * sizeY);
+  Triangle element;
 
-  arma::mat tmpMatrix2(size(tmpMatrix1), arma::fill::ones);
-  tmpVec2 = arma::linspace<arma::vec>(0, sizeX - 2, sizeX - 1);
+  // Boundary Condition data structures
+  std::vector<int> leftBCvec;
+  std::vector<int> rightBCvec;
+  std::vector<int> downBCvec;
+  std::vector<int> upBCvec;
 
-  tmpMatrix3 =
-      arma::kron(tmpMatrix1, tmpVec1) + arma::kron(tmpMatrix2, tmpVec2);
+  leftBCvec.reserve(sizeY);
+  rightBCvec.reserve(sizeY);
+  downBCvec.reserve(sizeX);
+  upBCvec.reserve(sizeX);
+  boundaryNode.insert({"Left", leftBCvec});
+  boundaryNode.insert({"Right", rightBCvec});
+  boundaryNode.insert({"Down", downBCvec});
+  boundaryNode.insert({"Up", upBCvec});
 
-  // Y vertices
-  arma::vec tmpVec3, tmpVec4;
-  tmpVec3.ones(sizeY - 1);
+  int a, b;
+  for (int i = 0; i < nodePairs.size(); i++) {
+    a = nodePairs[i].first;
+    b = nodePairs[i].second;
 
-  arma::mat tmpMatrix4(size(tmpMatrix3), arma::fill::ones);
-  tmpVec4 = arma::linspace<arma::vec>(0, sizeY - 2, sizeY - 1);
-  tmpVec4 = tmpVec4 * sizeX;
+    if (a > 0 && b + 1 < sizeY) {
+      element.a = i;
+      element.b = i + sizeX;
+      element.c = i - 1 + sizeX;
+      elements.push_back(element);
+    }
 
-  triangles = arma::kron(tmpMatrix3, tmpVec3) + arma::kron(tmpMatrix4, tmpVec4);
-  triangles = triangles - 1;
-}  // end Mesh func
+    if (a + 1 < sizeX && b + 1 < sizeY) {
+      element.a = i;
+      element.b = i + 1;
+      element.c = i + sizeX;
+      elements.push_back(element);
+    }
+  }  // end node loop
+
+  // Left BC
+  for (int i = 0; i < nodePairs.size(); i += sizeX)
+    boundaryNode["Left"].push_back(i);
+
+  // Right BC
+  for (int i = sizeX - 1; i < nodePairs.size(); i += sizeX)
+    boundaryNode["Right"].push_back(i);
+
+  // Down BC
+  for (int i = 0; i < sizeX; i++) boundaryNode["Down"].push_back(i);
+
+  // Up BC
+  for (int i = sizeX * (sizeY - 1); i < nodePairs.size(); i++)
+    boundaryNode["Up"].push_back(i);
+
+}  // end mesh Elements
