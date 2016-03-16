@@ -7,7 +7,7 @@
 int main() {
   Grid g;
   g.Mesh();
-
+  
   std::cout << "Hello World" << std::endl;
 
   return 0;

@@ -1,14 +1,13 @@
 #include "Grid.h"
-#include <iostream>
 #include <armadillo>
 
 Grid::Grid() {
-  sizeX = 4;
-  sizeY = 3;
+  sizeX = 5;
+  sizeY = 5;
 }
 
 Grid::Grid(std::string filename) {
-  sizeX = 4;
+  sizeX = 3;
   sizeY = 3;
   std::string notUsed = filename;
 }
@@ -35,58 +34,28 @@ void Grid::meshNodes() {
 }  // end meshNodes function
 
 void Grid::meshElements() {
-  // Assumes column major indexing (node # increase along x-axis)
-  elements.reserve(sizeX * sizeY);
-  Triangle element;
-
-  // Boundary Condition data structures
-  std::vector<int> leftBCvec;
-  std::vector<int> rightBCvec;
-  std::vector<int> downBCvec;
-  std::vector<int> upBCvec;
-
-  leftBCvec.reserve(sizeY);
-  rightBCvec.reserve(sizeY);
-  downBCvec.reserve(sizeX);
-  upBCvec.reserve(sizeX);
-  boundaryNode.insert({"Left", leftBCvec});
-  boundaryNode.insert({"Right", rightBCvec});
-  boundaryNode.insert({"Down", downBCvec});
-  boundaryNode.insert({"Up", upBCvec});
-
-  int a, b;
-  for (int i = 0; i < nodePairs.size(); i++) {
-    a = nodePairs[i].first;
-    b = nodePairs[i].second;
-
-    if (a > 0 && b + 1 < sizeY) {
-      element.a = i;
-      element.b = i + sizeX;
-      element.c = i - 1 + sizeX;
-      elements.push_back(element);
+  elements.resize(2*(sizeX-1)*(sizeY-1)); 
+  int j = 0;
+  int k = 0;
+  int l = 0;
+  for(int i = 0; i < elements.size(); i++){
+    elements[i].a = (sizeX)*j + k;
+    elements[i].b = (sizeX)*(j+l) + 1 + k;
+    elements[i].c = (sizeX)*(j+1) + 1 + k - l;
+    j++; 
+    if(j / float(sizeY-1) >= 1) 
+    {
+      j = 0;
+      k++;
+    }
+    
+    if(k == sizeX-1){
+      k = 0;
+      j = 0;
+      l++;
     }
 
-    if (a + 1 < sizeX && b + 1 < sizeY) {
-      element.a = i;
-      element.b = i + 1;
-      element.c = i + sizeX;
-      elements.push_back(element);
-    }
-  }  // end node loop
-
-  // Left BC
-  for (int i = 0; i < nodePairs.size(); i += sizeX)
-    boundaryNode["Left"].push_back(i);
-
-  // Right BC
-  for (int i = sizeX - 1; i < nodePairs.size(); i += sizeX)
-    boundaryNode["Right"].push_back(i);
-
-  // Down BC
-  for (int i = 0; i < sizeX; i++) boundaryNode["Down"].push_back(i);
-
-  // Up BC
-  for (int i = sizeX * (sizeY - 1); i < nodePairs.size(); i++)
-    boundaryNode["Up"].push_back(i);
-
+    std::cout << elements[i].a+1 << " " << elements[i].b+1 << " " << elements[i].c + 1 << std::endl;
+  }
+  
 }  // end mesh Elements
