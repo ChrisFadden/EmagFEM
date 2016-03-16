@@ -7,14 +7,15 @@ Grid::Grid() {
 }
 
 Grid::Grid(std::string filename) {
-  sizeX = 3;
-  sizeY = 3;
+  sizeX = 5;
+  sizeY = 5;
   std::string notUsed = filename;
 }
 
 void Grid::Mesh() {
   meshNodes();
   meshElements();
+  setBoundaryNodes();
 }  // end Mesh func
 
 void Grid::meshNodes() {
@@ -34,28 +35,48 @@ void Grid::meshNodes() {
 }  // end meshNodes function
 
 void Grid::meshElements() {
-  elements.resize(2*(sizeX-1)*(sizeY-1)); 
+  elements.resize(2 * (sizeX - 1) * (sizeY - 1));
   int j = 0;
   int k = 0;
   int l = 0;
-  for(int i = 0; i < elements.size(); i++){
+  for (int i = 0; i < elements.size(); i++) {
     elements[i].a = (sizeX)*j + k;
-    elements[i].b = (sizeX)*(j+l) + 1 + k;
-    elements[i].c = (sizeX)*(j+1) + 1 + k - l;
-    j++; 
-    if(j / float(sizeY-1) >= 1) 
-    {
+    elements[i].b = (sizeX) * (j + l) + 1 + k;
+    elements[i].c = (sizeX) * (j + 1) + 1 + k - l;
+    j++;
+    if (j / float(sizeY - 1) >= 1) {
       j = 0;
       k++;
     }
-    
-    if(k == sizeX-1){
+
+    if (k == sizeX - 1) {
       k = 0;
       j = 0;
       l++;
     }
-
-    std::cout << elements[i].a+1 << " " << elements[i].b+1 << " " << elements[i].c + 1 << std::endl;
   }
-  
 }  // end mesh Elements
+
+void Grid::setBoundaryNodes() {
+  boundaryNodes.resize(2 * sizeX + 2 * sizeY);
+
+  // Y lower boundary nodes
+  for (int i = 0; i < sizeX; i++) {
+    boundaryNodes.push_back(i);
+  }
+
+  // X left Boundary nodes
+  for (int i = sizeX; i < sizeX * sizeY; i += sizeX) {
+    boundaryNodes.push_back(i);
+  }
+
+  // Y higher boundary nodes
+  for (int i = 2 * sizeX - 1; i < sizeX * sizeY; i += sizeX) {
+    boundaryNodes.push_back(i);
+  }
+
+  // X right Boundary nodes
+  for (int i = sizeX * sizeY - sizeX + 1; i < sizeX * sizeY - 1; i++) {
+    boundaryNodes.push_back(i);
+  }
+}  // end setBoundaryNodes func

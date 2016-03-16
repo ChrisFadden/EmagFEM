@@ -29,10 +29,11 @@ class Grid {
   int numNodes;
   std::vector<std::pair<int, int>> nodePairs;
   std::vector<Triangle> elements;
-  
+  std::vector<int> boundaryNodes; 
  private:
   void meshNodes();
   void meshElements();
+  void setBoundaryNodes();
 };
 
 #endif
