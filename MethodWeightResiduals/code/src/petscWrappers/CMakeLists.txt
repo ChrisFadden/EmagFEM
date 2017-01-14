@@ -1,2 +1,2 @@
-add_library(petscWrapperslib vecWrap.cpp)
+add_library(petscWrapperslib wrapVec.cpp wrapMat.cpp)
 

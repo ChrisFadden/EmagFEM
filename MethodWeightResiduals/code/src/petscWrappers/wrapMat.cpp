@@ -1,0 +1,52 @@
+#include "wrapMat.h"
+#include <iostream>
+
+/***************
+ * CONSTRUCTORS
+ **************/
+// Construct from a std::vector
+wrapMat::wrapMat(const std::vector<std::vector<real>> &G) {
+  PetscErrorCode ierr;
+
+  this->M = G.size();
+  this->N = G[0].size();
+
+  ierr = MatCreate(PETSC_COMM_WORLD, &(this->A));
+  ierr = MatSetSizes(this->A, PETSC_DECIDE, PETSC_DECIDE, this->M, this->N);
+  ierr = MatSetFromOptions(this->A);
+  ierr = MatSetUp(this->A);
+
+  std::vector<int> idx(this->N);
+  for (int nn = 0; nn != this->N; ++nn) {
+    idx[nn] = nn;
+  }
+
+  // Set Matrix entries
+  for (int mm = 0; mm != this->M; ++mm) {
+    ierr = MatSetValues(this->A, 1, &mm, this->N, idx.data(), G[mm].data(),
+                        INSERT_VALUES);
+  }
+  ierr = MatAssemblyBegin(this->A, MAT_FINAL_ASSEMBLY);
+  ierr = MatAssemblyEnd(this->A, MAT_FINAL_ASSEMBLY);
+}
+
+// Copy Constructor (modify for Sparse Matrices)
+wrapMat::wrapMat(wrapMat &old) {
+  this->M = old.getSize_M();
+  this->N = old.getSize_N();
+  MatDuplicate(old.getMat(), MAT_COPY_VALUES, &(this->A));
+}
+
+/*********************
+ * MEMBER FUNC
+ ********************/
+
+// Access Functions
+Mat wrapMat::getMat() { return this->A; }
+loop wrapMat::getSize_M() { return this->M; }
+loop wrapMat::getSize_N() { return this->N; }
+
+/********************
+ * DESTRUCTOR
+ *******************/
+void wrapMat::cleanMem() { MatDestroy(&(this->A)); }

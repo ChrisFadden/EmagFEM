@@ -25,12 +25,21 @@ wrapVec::wrapVec(const std::vector<real> &b) {
   ierr = VecAssemblyEnd(this->v);
 }
 
+// Copy Constructor
+wrapVec::wrapVec(wrapVec &old) {
+  this->sizeVec = old.getSize();
+  VecDuplicate(old.getVec(), &(this->v));
+}
+
 /*********************
  * MEMBER FUNC
  ********************/
+
+// Access Functions
 Vec wrapVec::getVec() { return this->v; }
+loop wrapVec::getSize() { return this->sizeVec; }
 
 /********************
  * DESTRUCTOR
  *******************/
-void wrapVec::cleanMem() { VecDestroy(&v); }
+void wrapVec::cleanMem() { VecDestroy(&(this->v)); }

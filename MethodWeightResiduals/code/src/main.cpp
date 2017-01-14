@@ -1,3 +1,4 @@
+#include "wrapMat.h"
 #include "wrapVec.h"
 #include <iostream>
 #include <petsc.h>
@@ -6,16 +7,14 @@ int main(int argc, char **args) {
   PetscErrorCode ierr;
   PetscInitialize(&argc, &args, NULL, NULL);
 
-  Vec x;
-  Mat A;
   KSP ksp;
-  int i, j[4] = {0, 1, 2, 3}; // j = column indices
-  std::vector<double> ab = {7.0, 1.0, 1.0, 3.0};
+  std::vector<double> ab = {7.0, 1.0, 1.0, 3.0}; // entries of vector b
 
-  double aA[4][4] = {{1.0, 2.0, 3.0, 0.0}, // entries of matrix A
-                     {2.0, 1.0, -2.0, -3.0},
-                     {-1.0, 1.0, 1.0, 0.0},
-                     {0.0, 1.0, 1.0, -1.0}};
+  std::vector<std::vector<double>> aA = {
+      {1.0, 2.0, 3.0, 0.0}, // entries of matrix A
+      {2.0, 1.0, -2.0, -3.0},
+      {-1.0, 1.0, 1.0, 0.0},
+      {0.0, 1.0, 1.0, -1.0}};
 
   /******************
    * VECTOR CREATION
@@ -25,39 +24,30 @@ int main(int argc, char **args) {
   /*****************
    * MATRIX CREATION
    ****************/
-
-  // Create Matrix
-  ierr = MatCreate(PETSC_COMM_WORLD, &A);
-  ierr = MatSetSizes(A, PETSC_DECIDE, PETSC_DECIDE, 4, 4);
-  ierr = MatSetFromOptions(A);
-  ierr = MatSetUp(A);
-
-  { // Set Matrix entries
-    for (i = 0; i < 4; i++) {
-      ierr = MatSetValues(A, 1, &i, 4, j, aA[i], INSERT_VALUES);
-    }
-    ierr = MatAssemblyBegin(A, MAT_FINAL_ASSEMBLY);
-    ierr = MatAssemblyEnd(A, MAT_FINAL_ASSEMBLY);
-  }
+  wrapMat A(aA);
 
   /****************
    * MATRIX_SOLVE
    ****************/
 
   ierr = KSPCreate(PETSC_COMM_WORLD, &ksp);
-  ierr = KSPSetOperators(ksp, A, A);
+  ierr = KSPSetOperators(ksp, A.getMat(), A.getMat());
   ierr = KSPSetFromOptions(ksp);
-  ierr = VecDuplicate(b.getVec(), &x);
-  ierr = KSPSolve(ksp, b.getVec(), x);
-  ierr = VecView(x, PETSC_VIEWER_STDOUT_WORLD);
+
+  wrapVec x(b);
+  ierr = KSPSolve(ksp, b.getVec(), x.getVec());
+
+  // Print Out Vector
+  ierr = VecView(x.getVec(), PETSC_VIEWER_STDOUT_WORLD);
 
   /******************
    * CLEAN UP MEMORY
    ****************/
 
   KSPDestroy(&ksp);
-  MatDestroy(&A);
-  VecDestroy(&x);
+  // MatDestroy(&A);
+  A.cleanMem();
+  x.cleanMem();
   b.cleanMem();
 
   PetscFinalize();

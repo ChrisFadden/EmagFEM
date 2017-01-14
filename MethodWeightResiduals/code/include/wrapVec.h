@@ -13,10 +13,12 @@ private:
 public:
   // Constructors/Destructor
   wrapVec(const std::vector<real> &);
+  wrapVec(wrapVec &);
   void cleanMem();
 
   // Access Functions
   Vec getVec();
+  loop getSize();
 };
 
 #endif
