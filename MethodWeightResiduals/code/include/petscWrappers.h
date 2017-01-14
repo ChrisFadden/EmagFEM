@@ -4,6 +4,6 @@
 #include <petsc.h>
 #include <vector>
 
-Vec *createVec(const std::vector<double> &);
+Vec createVec(const std::vector<double> &);
 
 #endif

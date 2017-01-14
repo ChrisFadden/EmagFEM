@@ -1,26 +1,36 @@
-#include "petscWrappers.h"
+#include "wrapVec.h"
 #include <iostream>
-#include <stdlib.h>
+/***************
+ * CONSTRUCTORS
+ **************/
 
-typedef unsigned loop;
-
-// Wrapper for creating a PETSc vector from a C++ vector
-Vec *createVec(const std::vector<double> &v) {
+// Construct from a std::vector
+wrapVec::wrapVec(const std::vector<real> &b) {
   PetscErrorCode ierr;
 
-  Vec *b = (Vec *)malloc(sizeof(Vec));
-  std::vector<int> idx(v.size());
+  std::vector<int> idx(b.size());
   for (loop i = 0; i != idx.size(); ++i) {
     idx[i] = i;
   }
 
-  ierr = VecCreate(PETSC_COMM_WORLD, b);
-  ierr = VecSetSizes(*b, PETSC_DECIDE, v.size());
-  ierr = VecSetFromOptions(*b);
-  ierr = VecSetValues(*b, v.size(), idx.data(), v.data(), INSERT_VALUES);
+  this->sizeVec = b.size();
+
+  ierr = VecCreate(PETSC_COMM_WORLD, &(this->v));
+  ierr = VecSetSizes(this->v, PETSC_DECIDE, b.size());
+  ierr = VecSetFromOptions(this->v);
+  ierr = VecSetValues(this->v, b.size(), idx.data(), b.data(), INSERT_VALUES);
 
   // Distribute with MPI
-  ierr = VecAssemblyBegin(*b);
-  ierr = VecAssemblyEnd(*b);
-  return b;
+  ierr = VecAssemblyBegin(this->v);
+  ierr = VecAssemblyEnd(this->v);
 }
+
+/*********************
+ * MEMBER FUNC
+ ********************/
+Vec wrapVec::getVec() { return this->v; }
+
+/********************
+ * DESTRUCTOR
+ *******************/
+void wrapVec::cleanMem() { VecDestroy(&v); }

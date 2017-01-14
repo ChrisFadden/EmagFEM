@@ -1,11 +1,12 @@
-#include "petscWrappers.h"
+#include "wrapVec.h"
+#include <iostream>
 #include <petsc.h>
 
 int main(int argc, char **args) {
   PetscErrorCode ierr;
   PetscInitialize(&argc, &args, NULL, NULL);
 
-  Vec x, b;
+  Vec x;
   Mat A;
   KSP ksp;
   int i, j[4] = {0, 1, 2, 3}; // j = column indices
@@ -19,8 +20,7 @@ int main(int argc, char **args) {
   /******************
    * VECTOR CREATION
    ******************/
-  Vec *bTest = createVec(ab);
-  b = *bTest;
+  wrapVec b(ab);
 
   /*****************
    * MATRIX CREATION
@@ -47,8 +47,8 @@ int main(int argc, char **args) {
   ierr = KSPCreate(PETSC_COMM_WORLD, &ksp);
   ierr = KSPSetOperators(ksp, A, A);
   ierr = KSPSetFromOptions(ksp);
-  ierr = VecDuplicate(b, &x);
-  ierr = KSPSolve(ksp, b, x);
+  ierr = VecDuplicate(b.getVec(), &x);
+  ierr = KSPSolve(ksp, b.getVec(), x);
   ierr = VecView(x, PETSC_VIEWER_STDOUT_WORLD);
 
   /******************
@@ -58,9 +58,8 @@ int main(int argc, char **args) {
   KSPDestroy(&ksp);
   MatDestroy(&A);
   VecDestroy(&x);
-  VecDestroy(&b);
+  b.cleanMem();
 
   PetscFinalize();
-
   return 0;
 }
