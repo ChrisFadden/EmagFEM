@@ -12,8 +12,9 @@ private:
 
 public:
   // Constructors/Destructor
-  wrapVec(const std::vector<real> &);
+  wrapVec(std::vector<real> &);
   wrapVec(wrapVec &);
+  ~wrapVec();
   void cleanMem();
 
   // Access Functions

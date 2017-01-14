@@ -5,7 +5,7 @@
  **************/
 
 // Construct from a std::vector
-wrapVec::wrapVec(const std::vector<real> &b) {
+wrapVec::wrapVec(std::vector<real> &b) {
   PetscErrorCode ierr;
 
   std::vector<int> idx(b.size());
@@ -43,3 +43,4 @@ loop wrapVec::getSize() { return this->sizeVec; }
  * DESTRUCTOR
  *******************/
 void wrapVec::cleanMem() { VecDestroy(&(this->v)); }
+wrapVec::~wrapVec() { VecDestroy(&(this->v)); }

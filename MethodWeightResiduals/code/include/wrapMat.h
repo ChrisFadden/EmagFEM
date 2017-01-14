@@ -2,6 +2,7 @@
 #define WRAPMAT_H
 
 #include "Constants.h"
+#include "wrapVec.h"
 #include <petsc.h>
 #include <vector>
 
@@ -13,14 +14,18 @@ private:
 
 public:
   // Constructors/Destructor
-  wrapMat(const std::vector<std::vector<real>> &);
+  wrapMat(std::vector<std::vector<real>> &);
   wrapMat(wrapMat &);
   void cleanMem();
+  ~wrapMat();
 
   // Access Functions
   Mat getMat();
   loop getSize_M();
   loop getSize_N();
+
+  // Solve
+  void solve(wrapVec &b, wrapVec &x);
 };
 
 #endif

@@ -5,7 +5,7 @@
  * CONSTRUCTORS
  **************/
 // Construct from a std::vector
-wrapMat::wrapMat(const std::vector<std::vector<real>> &G) {
+wrapMat::wrapMat(std::vector<std::vector<real>> &G) {
   PetscErrorCode ierr;
 
   this->M = G.size();
@@ -46,7 +46,23 @@ Mat wrapMat::getMat() { return this->A; }
 loop wrapMat::getSize_M() { return this->M; }
 loop wrapMat::getSize_N() { return this->N; }
 
+//  Matrix Solve
+void wrapMat::solve(wrapVec &b, wrapVec &x) {
+  PetscErrorCode ierr;
+  KSP ksp;
+  // Create Solver
+  ierr = KSPCreate(PETSC_COMM_WORLD, &ksp);
+  ierr = KSPSetOperators(ksp, this->A, this->A);
+  ierr = KSPSetFromOptions(ksp);
+
+  x = b;
+  ierr = KSPSolve(ksp, b.getVec(), x.getVec());
+
+  return;
+}
+
 /********************
  * DESTRUCTOR
  *******************/
 void wrapMat::cleanMem() { MatDestroy(&(this->A)); }
+wrapMat::~wrapMat() { MatDestroy(&(this->A)); }
