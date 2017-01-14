@@ -3,6 +3,7 @@
 #include "wrapVec.h"
 #include <iostream>
 #include <petsc.h>
+#include <petscviewerhdf5.h>
 
 int main(int argc, char **args) {
   PetscErrorCode ierr;
@@ -19,10 +20,17 @@ int main(int argc, char **args) {
     wrapVec b(ab); // initialize b to vector
     wrapMat A(aA); // initialize A to matrix
     wrapVec x(b);  // initialize answer same as b
-    A.solve(b, x); //, ksp);
+    A.solve(b, x);
 
     // Print Out Vector
     ierr = VecView(x.getVec(), PETSC_VIEWER_STDOUT_WORLD);
+
+    // Print Vec to file
+    PetscViewer viewer;
+    PetscViewerHDF5Open(PETSC_COMM_WORLD, "../../data/vector.h5",
+                        FILE_MODE_WRITE, &viewer);
+    VecView(x.getVec(), viewer);
+    PetscViewerDestroy(&viewer);
   }
   PetscFinalize();
   return 0;
