@@ -4,11 +4,18 @@
 #include <iostream>
 #include <petsc.h>
 #include <petscviewerhdf5.h>
+#include <string>
 
 int main(int argc, char **args) {
-  PetscErrorCode ierr;
+
   PetscInitialize(&argc, &args, NULL, NULL);
   { // Wrap everything in a scope so destructors are called before PetscFinalize
+
+    // Prevent .info file from being created
+    PetscErrorCode ierr =
+        PetscOptionsSetValue(NULL, "-viewer_binary_skip_info", "");
+    CHKERRQ(ierr);
+
     std::vector<double> ab = {7.0, 1.0, 1.0, 3.0}; // entries of vector b
 
     std::vector<std::vector<double>> aA = {
@@ -21,20 +28,8 @@ int main(int argc, char **args) {
     wrapMat A(aA); // initialize A to matrix
     wrapVec x(b);  // initialize answer same as b
     A.solve(b, x);
-
-    // Print Out Vector
-    // ierr = VecView(x.getVec(), PETSC_VIEWER_STDOUT_WORLD);
-
-    // Print Vec to file
-    PetscViewer viewer;
-    PetscViewerHDF5Open(PETSC_COMM_WORLD, "../../data/vector.h5",
-                        FILE_MODE_WRITE, &viewer);
-
-    PetscObjectSetName((PetscObject)x.getVec(), "vecX");
-    VecView(x.getVec(), viewer);
-    PetscObjectSetName((PetscObject)b.getVec(), "vecB");
-    VecView(b.getVec(), viewer);
-    PetscViewerDestroy(&viewer);
+    b.writeToBIN("vec.dat");
+    A.writeToBIN("mat.dat");
   }
   PetscFinalize();
   return 0;

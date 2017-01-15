@@ -26,6 +26,9 @@ public:
 
   // Solve
   void solve(wrapVec &b, wrapVec &x);
+
+  void writeToBIN(std::string, PetscFileMode type = FILE_MODE_WRITE,
+                  bool fullPath = false);
 };
 
 #endif

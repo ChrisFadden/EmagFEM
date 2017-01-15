@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#define DATA_PATH "../../data/"
+
 #include <complex>
 
 // Precision Numbers (PETSc can only handle double as its compiled (I think...)

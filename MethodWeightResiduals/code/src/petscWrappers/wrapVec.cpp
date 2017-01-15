@@ -1,5 +1,6 @@
 #include "wrapVec.h"
 #include <iostream>
+
 /***************
  * CONSTRUCTORS
  **************/
@@ -38,6 +39,19 @@ wrapVec::wrapVec(wrapVec &old) {
 // Access Functions
 Vec wrapVec::getVec() { return this->v; }
 loop wrapVec::getSize() { return this->sizeVec; }
+
+void wrapVec::writeToBIN(std::string file, PetscFileMode type, bool fullPath) {
+  // Create the FileName
+  std::string fp = "";
+  if (!fullPath)
+    fp += DATA_PATH;
+  fp += file;
+
+  PetscViewer viewer;
+  PetscViewerBinaryOpen(PETSC_COMM_WORLD, fp.c_str(), type, &viewer);
+  VecView(this->v, viewer);
+  PetscViewerDestroy(&viewer);
+}
 
 /********************
  * DESTRUCTOR

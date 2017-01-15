@@ -1,5 +1,6 @@
 #include "wrapMat.h"
 #include <iostream>
+#include <petscsys.h>
 
 /***************
  * CONSTRUCTORS
@@ -55,10 +56,25 @@ void wrapMat::solve(wrapVec &b, wrapVec &x) {
   ierr = KSPSetOperators(ksp, this->A, this->A);
   ierr = KSPSetFromOptions(ksp);
 
-  x = b;
+  //  x = b;
   ierr = KSPSolve(ksp, b.getVec(), x.getVec());
+  // KSPDestroy(&ksp);
 
   return;
+}
+
+//  Binary File Write
+void wrapMat::writeToBIN(std::string file, PetscFileMode type, bool fullPath) {
+  // Create the FileName
+  std::string fp = "";
+  if (!fullPath)
+    fp += DATA_PATH;
+  fp += file;
+
+  PetscViewer viewer;
+  PetscViewerBinaryOpen(PETSC_COMM_WORLD, fp.c_str(), type, &viewer);
+  MatView(this->A, viewer);
+  PetscViewerDestroy(&viewer);
 }
 
 /********************
