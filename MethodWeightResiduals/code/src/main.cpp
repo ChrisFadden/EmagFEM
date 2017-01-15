@@ -23,13 +23,17 @@ int main(int argc, char **args) {
     A.solve(b, x);
 
     // Print Out Vector
-    ierr = VecView(x.getVec(), PETSC_VIEWER_STDOUT_WORLD);
+    // ierr = VecView(x.getVec(), PETSC_VIEWER_STDOUT_WORLD);
 
     // Print Vec to file
     PetscViewer viewer;
     PetscViewerHDF5Open(PETSC_COMM_WORLD, "../../data/vector.h5",
                         FILE_MODE_WRITE, &viewer);
+
+    PetscObjectSetName((PetscObject)x.getVec(), "vecX");
     VecView(x.getVec(), viewer);
+    PetscObjectSetName((PetscObject)b.getVec(), "vecB");
+    VecView(b.getVec(), viewer);
     PetscViewerDestroy(&viewer);
   }
   PetscFinalize();
