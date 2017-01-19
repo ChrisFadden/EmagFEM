@@ -11,5 +11,4 @@ typedef std::complex<real> cplx;
 
 // loop
 typedef std::size_t loop;
-
 #endif

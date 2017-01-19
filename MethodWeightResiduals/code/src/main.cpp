@@ -1,36 +1,40 @@
-#include "petscsys.h"
-#include "wrapMat.h"
-#include "wrapVec.h"
 #include <iostream>
-#include <petsc.h>
-#include <petscviewerhdf5.h>
-#include <string>
+#include <vector>
 
-int main(int argc, char **args) {
+#include "viennacl/linalg/direct_solve.hpp"
+#include "viennacl/linalg/lu.hpp"
+#include "viennacl/matrix.hpp"
+#include "viennacl/vector.hpp"
 
-  PetscInitialize(&argc, &args, NULL, NULL);
-  { // Wrap everything in a scope so destructors are called before PetscFinalize
+int main() {
 
-    // Prevent .info file from being created
-    PetscErrorCode ierr =
-        PetscOptionsSetValue(NULL, "-viewer_binary_skip_info", "");
-    CHKERRQ(ierr);
+  typedef float ScalarType;
 
-    std::vector<double> ab = {7.0, 1.0, 1.0, 3.0}; // entries of vector b
+  viennacl::vector<ScalarType> b;
+  viennacl::vector<ScalarType> x;
+  viennacl::matrix<ScalarType> A(4, 4);
 
-    std::vector<std::vector<double>> aA = {
-        {1.0, 2.0, 3.0, 0.0}, // entries of matrix A
-        {2.0, 1.0, -2.0, -3.0},
-        {-1.0, 1.0, 1.0, 0.0},
-        {0.0, 1.0, 1.0, -1.0}};
+  std::vector<double> ab = {7.0, 1.0, 1.0, 3.0}; // entries of vector b
 
-    wrapVec b(ab); // initialize b to vector
-    wrapMat A(aA); // initialize A to matrix
-    wrapVec x(b);  // initialize answer same as b
-    A.solve(b, x);
-    b.writeToBIN("vec.dat");
-    A.writeToBIN("mat.dat");
+  std::vector<std::vector<double>> aA = {
+      {1.0, 2.0, 3.0, 0.0}, // entries of matrix A
+      {2.0, 1.0, -2.0, -3.0},
+      {-1.0, 1.0, 1.0, 0.0},
+      {0.0, 1.0, 1.0, -1.0}};
+
+  viennacl::copy(ab, b);
+
+  for (int i = 0; i != 4; ++i) {
+    for (int j = 0; j != 4; ++j) {
+      A(i, j) = aA[i][j];
+    }
   }
-  PetscFinalize();
-  return 0;
+
+  viennacl::linalg::lu_factorize(A);
+  x = b;
+  viennacl::linalg::lu_substitute(A, x);
+
+  std::cout << x << std::endl;
+
+  return EXIT_SUCCESS;
 }
