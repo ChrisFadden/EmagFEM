@@ -1,0 +1,131 @@
+\hypertarget{fem1d_8h}{}\section{include/fem1d.h File Reference}
+\label{fem1d_8h}\index{include/fem1d.\+h@{include/fem1d.\+h}}
+{\ttfamily \#include \char`\"{}Constants.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}matrix\+I\+O.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Eigen/\+Dense$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{fem1d_8h_aa5810e457393721c67247ee414d15fae}{elm\+\_\+line1} (const node x1, const node x2, const std\+::size\+\_\+t N, const double ratio, Eigen\+::\+Vector\+Xd \&xe)
+\begin{DoxyCompactList}\small\item\em 1-\/D linear Meshing \end{DoxyCompactList}\item 
+void \hyperlink{fem1d_8h_a2774d95f9e71fe0404d6a4eadbdaa48d}{calc\+Src} (const std\+::size\+\_\+t N, Eigen\+::\+Vector\+Xd \&src, const Eigen\+::\+Vector\+Xd \&xe)
+\begin{DoxyCompactList}\small\item\em Sets the source function values. \end{DoxyCompactList}\item 
+void \hyperlink{fem1d_8h_aa0009121356f98b2bae119bf543dfd1d}{assemble\+System\+\_\+\+Diff} (const std\+::size\+\_\+t N, const Eigen\+::\+Vector\+Xd \&xe, const double q0, const double fL, const double k, const Eigen\+::\+Vector\+Xd \&s, Eigen\+::\+Matrix\+Xd \&A, Eigen\+::\+Vector\+Xd \&b)
+\begin{DoxyCompactList}\small\item\em Assembles the Finite Element Matrix A and R\+HS b for the steady state diffusion (Poisson) equation $k\frac{d^2f}{dx^2} + s(x)=0$ with Neumann BC $q_0 = -k \frac{df}{dx}[x=0]$ and Diriclet BC $f(x=L) = f_L$. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{fem1d_8h_a0b95a2a1915189c8b3aae063cdbfd3c7}\label{fem1d_8h_a0b95a2a1915189c8b3aae063cdbfd3c7}} 
+void \hyperlink{fem1d_8h_a0b95a2a1915189c8b3aae063cdbfd3c7}{test\+\_\+fem1d\+\_\+\+Diff} ()
+\begin{DoxyCompactList}\small\item\em Finite and Spectral Elements w/ M\+A\+T\+L\+AB pg. 31 Poisson Eqn. \end{DoxyCompactList}\item 
+void \hyperlink{fem1d_8h_ae8876dcac823c13f342ef1e4c0f8291d}{assemble\+System\+\_\+\+Helm} (const std\+::size\+\_\+t N, const Eigen\+::\+Vector\+Xd \&xe, const double q0, const double fL, const double k, const double alpha, Eigen\+::\+Matrix\+Xd \&A, Eigen\+::\+Vector\+Xd \&b)
+\begin{DoxyCompactList}\small\item\em Assembles the Finite Element Matrix A and R\+HS b for the Helmholtz equation $k\frac{d^2f}{dx^2} + \alpha f =0$ with Neumann BC $q_0 = -k \frac{df}{dx}[x=0]$ and Diriclet BC $f(x=L) = f_L$. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{fem1d_8h_a2d7c919e32f9439e23783c1add8c385d}\label{fem1d_8h_a2d7c919e32f9439e23783c1add8c385d}} 
+void \hyperlink{fem1d_8h_a2d7c919e32f9439e23783c1add8c385d}{test\+\_\+fem1d\+\_\+\+Helm} ()
+\begin{DoxyCompactList}\small\item\em Finite and Spectral Elements w/ M\+A\+T\+L\+AB pg. 50 Helmholtz Eqn. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{fem1d_8h_a87c14fd535ef846951cecc6f7cb3bd47}\label{fem1d_8h_a87c14fd535ef846951cecc6f7cb3bd47}} 
+void \hyperlink{fem1d_8h_a87c14fd535ef846951cecc6f7cb3bd47}{test\+\_\+fem1d\+\_\+\+Quad\+Elm\+\_\+\+Diff} ()
+\begin{DoxyCompactList}\small\item\em Finite and Spectral Elements w/ M\+A\+T\+L\+AB pg. 79 Poisson Eqn w/ Quadratic elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Functions for F\+EM in 1D from Finite and Spectral Element Methods with M\+A\+T\+L\+AB 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{fem1d_8h_aa0009121356f98b2bae119bf543dfd1d}\label{fem1d_8h_aa0009121356f98b2bae119bf543dfd1d}} 
+\index{fem1d.\+h@{fem1d.\+h}!assemble\+System\+\_\+\+Diff@{assemble\+System\+\_\+\+Diff}}
+\index{assemble\+System\+\_\+\+Diff@{assemble\+System\+\_\+\+Diff}!fem1d.\+h@{fem1d.\+h}}
+\subsubsection{\texorpdfstring{assemble\+System\+\_\+\+Diff()}{assembleSystem\_Diff()}}
+{\footnotesize\ttfamily void assemble\+System\+\_\+\+Diff (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{N,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{xe,  }\item[{const double}]{q0,  }\item[{const double}]{fL,  }\item[{const double}]{k,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{s,  }\item[{Eigen\+::\+Matrix\+Xd \&}]{A,  }\item[{Eigen\+::\+Vector\+Xd \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Assembles the Finite Element Matrix A and R\+HS b for the steady state diffusion (Poisson) equation $k\frac{d^2f}{dx^2} + s(x)=0$ with Neumann BC $q_0 = -k \frac{df}{dx}[x=0]$ and Diriclet BC $f(x=L) = f_L$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em I\+N\+P\+UT} & N Length of Interval \\
+\hline
+{\em I\+N\+P\+UT} & xe node listing \\
+\hline
+{\em I\+N\+P\+UT} & q0 BC parameter \\
+\hline
+{\em I\+N\+P\+UT} & fL BC parameter \\
+\hline
+{\em I\+N\+P\+UT} & k BC parameter \\
+\hline
+{\em I\+N\+P\+UT} & s Src Vector \\
+\hline
+{\em O\+U\+T\+P\+UT} & A F\+EM Matrix \\
+\hline
+{\em O\+U\+T\+P\+UT} & b F\+EM Src \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{fem1d_8h_ae8876dcac823c13f342ef1e4c0f8291d}\label{fem1d_8h_ae8876dcac823c13f342ef1e4c0f8291d}} 
+\index{fem1d.\+h@{fem1d.\+h}!assemble\+System\+\_\+\+Helm@{assemble\+System\+\_\+\+Helm}}
+\index{assemble\+System\+\_\+\+Helm@{assemble\+System\+\_\+\+Helm}!fem1d.\+h@{fem1d.\+h}}
+\subsubsection{\texorpdfstring{assemble\+System\+\_\+\+Helm()}{assembleSystem\_Helm()}}
+{\footnotesize\ttfamily void assemble\+System\+\_\+\+Helm (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{N,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{xe,  }\item[{const double}]{q0,  }\item[{const double}]{fL,  }\item[{const double}]{k,  }\item[{const double}]{alpha,  }\item[{Eigen\+::\+Matrix\+Xd \&}]{A,  }\item[{Eigen\+::\+Vector\+Xd \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Assembles the Finite Element Matrix A and R\+HS b for the Helmholtz equation $k\frac{d^2f}{dx^2} + \alpha f =0$ with Neumann BC $q_0 = -k \frac{df}{dx}[x=0]$ and Diriclet BC $f(x=L) = f_L$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em I\+N\+P\+UT} & N Length of Interval \\
+\hline
+{\em I\+N\+P\+UT} & xe node listing \\
+\hline
+{\em I\+N\+P\+UT} & q0 BC parameter \\
+\hline
+{\em I\+N\+P\+UT} & fL BC parameter \\
+\hline
+{\em I\+N\+P\+UT} & k BC parameter \\
+\hline
+{\em I\+N\+P\+UT} & $\alpha$ wavenumber squared \\
+\hline
+{\em O\+U\+T\+P\+UT} & A F\+EM Matrix \\
+\hline
+{\em O\+U\+T\+P\+UT} & b F\+EM Src \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{fem1d_8h_a2774d95f9e71fe0404d6a4eadbdaa48d}\label{fem1d_8h_a2774d95f9e71fe0404d6a4eadbdaa48d}} 
+\index{fem1d.\+h@{fem1d.\+h}!calc\+Src@{calc\+Src}}
+\index{calc\+Src@{calc\+Src}!fem1d.\+h@{fem1d.\+h}}
+\subsubsection{\texorpdfstring{calc\+Src()}{calcSrc()}}
+{\footnotesize\ttfamily void calc\+Src (\begin{DoxyParamCaption}\item[{const std\+::size\+\_\+t}]{N,  }\item[{Eigen\+::\+Vector\+Xd \&}]{src,  }\item[{const Eigen\+::\+Vector\+Xd \&}]{xe }\end{DoxyParamCaption})}
+
+
+
+Sets the source function values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em I\+N\+P\+UT} & N Length of Interval \\
+\hline
+{\em O\+U\+T\+P\+UT} & src Vector \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{fem1d_8h_aa5810e457393721c67247ee414d15fae}\label{fem1d_8h_aa5810e457393721c67247ee414d15fae}} 
+\index{fem1d.\+h@{fem1d.\+h}!elm\+\_\+line1@{elm\+\_\+line1}}
+\index{elm\+\_\+line1@{elm\+\_\+line1}!fem1d.\+h@{fem1d.\+h}}
+\subsubsection{\texorpdfstring{elm\+\_\+line1()}{elm\_line1()}}
+{\footnotesize\ttfamily void elm\+\_\+line1 (\begin{DoxyParamCaption}\item[{const node}]{x1,  }\item[{const node}]{x2,  }\item[{const std\+::size\+\_\+t}]{N,  }\item[{const double}]{ratio,  }\item[{Eigen\+::\+Vector\+Xd \&}]{xe }\end{DoxyParamCaption})}
+
+
+
+1-\/D linear Meshing 
+
+
+\begin{DoxyParams}{Parameters}
+{\em I\+N\+P\+UT} & x1 starting node \\
+\hline
+{\em I\+N\+P\+UT} & x2 ending node \\
+\hline
+{\em I\+N\+P\+UT} & N Length of interval \\
+\hline
+{\em I\+N\+P\+UT} & ratio of the last element / first element \\
+\hline
+{\em O\+U\+T\+P\+UT} & xe array returning the node vector \\
+\hline
+\end{DoxyParams}

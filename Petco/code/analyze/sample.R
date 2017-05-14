@@ -1,5 +1,0 @@
-source("parsePetscBin.R")
-  v = parsePetscBinVec("vec.dat")
-  print(v)
-  A = parsePetscBinMat("mat.dat")
-  print(A)

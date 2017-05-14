@@ -1,0 +1,7 @@
+\form#0:$k\frac{d^2f}{dx^2} + s(x) *= *0$
+\form#1:$q_0 = -k \frac{df}{dx}[x=0]$
+\form#2:$f(x=L) *= f_L$
+\form#3:$k\frac{d^2f}{dx^2} + s(x)=0$
+\form#4:$f(x=L) = f_L$
+\form#5:$k\frac{d^2f}{dx^2} + \alpha f =0$
+\form#6:$\alpha$
