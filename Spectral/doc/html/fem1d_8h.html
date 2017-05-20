@@ -78,26 +78,29 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa5810e457393721c67247ee414d15fae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#aa5810e457393721c67247ee414d15fae">elm_line1</a> (const node x1, const node x2, const std::size_t N, const double ratio, Eigen::VectorXd &amp;xe)</td></tr>
-<tr class="memdesc:aa5810e457393721c67247ee414d15fae"><td class="mdescLeft">&#160;</td><td class="mdescRight">1-D linear Meshing  <a href="#aa5810e457393721c67247ee414d15fae">More...</a><br /></td></tr>
-<tr class="separator:aa5810e457393721c67247ee414d15fae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2774d95f9e71fe0404d6a4eadbdaa48d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#a2774d95f9e71fe0404d6a4eadbdaa48d">calcSrc</a> (const std::size_t N, Eigen::VectorXd &amp;src, const Eigen::VectorXd &amp;xe)</td></tr>
-<tr class="memdesc:a2774d95f9e71fe0404d6a4eadbdaa48d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the source function values.  <a href="#a2774d95f9e71fe0404d6a4eadbdaa48d">More...</a><br /></td></tr>
-<tr class="separator:a2774d95f9e71fe0404d6a4eadbdaa48d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0009121356f98b2bae119bf543dfd1d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#aa0009121356f98b2bae119bf543dfd1d">assembleSystem_Diff</a> (const std::size_t N, const Eigen::VectorXd &amp;xe, const double q0, const double fL, const double k, const Eigen::VectorXd &amp;s, Eigen::MatrixXd &amp;A, Eigen::VectorXd &amp;b)</td></tr>
-<tr class="memdesc:aa0009121356f98b2bae119bf543dfd1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the Finite Element Matrix A and RHS b for the steady state diffusion (Poisson) equation <img class="formulaInl" alt="$k\frac{d^2f}{dx^2} + s(x)=0$" src="form_3.png"/> with Neumann BC <img class="formulaInl" alt="$q_0 = -k \frac{df}{dx}[x=0]$" src="form_1.png"/> and Diriclet BC <img class="formulaInl" alt="$f(x=L) = f_L$" src="form_4.png"/>.  <a href="#aa0009121356f98b2bae119bf543dfd1d">More...</a><br /></td></tr>
-<tr class="separator:aa0009121356f98b2bae119bf543dfd1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab791654ef295fe4aebed535f2c54c7a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#ab791654ef295fe4aebed535f2c54c7a5">elm_line1</a> (const node x1, const node x2, const std::size_t N, const real ratio, Vec &amp;xe)</td></tr>
+<tr class="memdesc:ab791654ef295fe4aebed535f2c54c7a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">1-D linear Meshing  <a href="#ab791654ef295fe4aebed535f2c54c7a5">More...</a><br /></td></tr>
+<tr class="separator:ab791654ef295fe4aebed535f2c54c7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab835526179ddc8dd63062412e0e11200"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#ab835526179ddc8dd63062412e0e11200">calcSrc</a> (const std::size_t N, Vec &amp;src, const Vec &amp;xe)</td></tr>
+<tr class="memdesc:ab835526179ddc8dd63062412e0e11200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the source function values.  <a href="#ab835526179ddc8dd63062412e0e11200">More...</a><br /></td></tr>
+<tr class="separator:ab835526179ddc8dd63062412e0e11200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1405c7ad7e3955d3bd148c61371895c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#a1405c7ad7e3955d3bd148c61371895c1">assembleSystem_Diff</a> (const std::size_t N, const Vec &amp;xe, const real q0, const real fL, const real k, const Vec &amp;s, Mat &amp;A, Vec &amp;b)</td></tr>
+<tr class="memdesc:a1405c7ad7e3955d3bd148c61371895c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the Finite Element Matrix A and RHS b for the steady state diffusion (Poisson) equation <img class="formulaInl" alt="$k\frac{d^2f}{dx^2} + s(x)=0$" src="form_3.png"/> with Neumann BC <img class="formulaInl" alt="$q_0 = -k \frac{df}{dx}[x=0]$" src="form_1.png"/> and Diriclet BC <img class="formulaInl" alt="$f(x=L) = f_L$" src="form_4.png"/>.  <a href="#a1405c7ad7e3955d3bd148c61371895c1">More...</a><br /></td></tr>
+<tr class="separator:a1405c7ad7e3955d3bd148c61371895c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b95a2a1915189c8b3aae063cdbfd3c7"><td class="memItemLeft" align="right" valign="top"><a id="a0b95a2a1915189c8b3aae063cdbfd3c7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#a0b95a2a1915189c8b3aae063cdbfd3c7">test_fem1d_Diff</a> ()</td></tr>
 <tr class="memdesc:a0b95a2a1915189c8b3aae063cdbfd3c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finite and Spectral Elements w/ MATLAB pg. 31 Poisson Eqn. <br /></td></tr>
 <tr class="separator:a0b95a2a1915189c8b3aae063cdbfd3c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8876dcac823c13f342ef1e4c0f8291d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#ae8876dcac823c13f342ef1e4c0f8291d">assembleSystem_Helm</a> (const std::size_t N, const Eigen::VectorXd &amp;xe, const double q0, const double fL, const double k, const double alpha, Eigen::MatrixXd &amp;A, Eigen::VectorXd &amp;b)</td></tr>
-<tr class="memdesc:ae8876dcac823c13f342ef1e4c0f8291d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the Finite Element Matrix A and RHS b for the Helmholtz equation <img class="formulaInl" alt="$k\frac{d^2f}{dx^2} + \alpha f =0$" src="form_5.png"/> with Neumann BC <img class="formulaInl" alt="$q_0 = -k \frac{df}{dx}[x=0]$" src="form_1.png"/> and Diriclet BC <img class="formulaInl" alt="$f(x=L) = f_L$" src="form_4.png"/>.  <a href="#ae8876dcac823c13f342ef1e4c0f8291d">More...</a><br /></td></tr>
-<tr class="separator:ae8876dcac823c13f342ef1e4c0f8291d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66b25aa5e5581b4f7b455e7d6211ccf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#a66b25aa5e5581b4f7b455e7d6211ccf5">assembleSystem_Helm</a> (const std::size_t N, const Vec &amp;xe, const real q0, const real fL, const real k, const real alpha, Mat &amp;A, Vec &amp;b)</td></tr>
+<tr class="memdesc:a66b25aa5e5581b4f7b455e7d6211ccf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the Finite Element Matrix A and RHS b for the Helmholtz equation <img class="formulaInl" alt="$k\frac{d^2f}{dx^2} + \alpha f =0$" src="form_5.png"/> with Neumann BC <img class="formulaInl" alt="$q_0 = -k \frac{df}{dx}[x=0]$" src="form_1.png"/> and Diriclet BC <img class="formulaInl" alt="$f(x=L) = f_L$" src="form_4.png"/>.  <a href="#a66b25aa5e5581b4f7b455e7d6211ccf5">More...</a><br /></td></tr>
+<tr class="separator:a66b25aa5e5581b4f7b455e7d6211ccf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d7c919e32f9439e23783c1add8c385d"><td class="memItemLeft" align="right" valign="top"><a id="a2d7c919e32f9439e23783c1add8c385d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#a2d7c919e32f9439e23783c1add8c385d">test_fem1d_Helm</a> ()</td></tr>
 <tr class="memdesc:a2d7c919e32f9439e23783c1add8c385d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finite and Spectral Elements w/ MATLAB pg. 50 Helmholtz Eqn. <br /></td></tr>
 <tr class="separator:a2d7c919e32f9439e23783c1add8c385d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a893494efd071d1be85efbe2803a220ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#a893494efd071d1be85efbe2803a220ab">assembleSystem_QuadElm_Diff</a> (const std::size_t N, const Vec &amp;xe, const real beta, const real q0, const real fL, const real k, const Vec &amp;s, Mat &amp;A, Vec &amp;b)</td></tr>
+<tr class="memdesc:a893494efd071d1be85efbe2803a220ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assembles the Finite Element Matrix A and RHS b with Quadratic Elements for the steady state diffusion (Poisson) equation <img class="formulaInl" alt="$k\frac{d^2f}{dx^2} + s(x)=0$" src="form_3.png"/> with Neumann BC <img class="formulaInl" alt="$q_0 = -k \frac{df}{dx}[x=0]$" src="form_1.png"/> and Diriclet BC <img class="formulaInl" alt="$f(x=L) = f_L$" src="form_4.png"/>.  <a href="#a893494efd071d1be85efbe2803a220ab">More...</a><br /></td></tr>
+<tr class="separator:a893494efd071d1be85efbe2803a220ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87c14fd535ef846951cecc6f7cb3bd47"><td class="memItemLeft" align="right" valign="top"><a id="a87c14fd535ef846951cecc6f7cb3bd47"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1d_8h.html#a87c14fd535ef846951cecc6f7cb3bd47">test_fem1d_QuadElm_Diff</a> ()</td></tr>
 <tr class="memdesc:a87c14fd535ef846951cecc6f7cb3bd47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finite and Spectral Elements w/ MATLAB pg. 79 Poisson Eqn w/ Quadratic elements. <br /></td></tr>
@@ -106,8 +109,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions for FEM in 1D from Finite and Spectral Element Methods with MATLAB </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aa0009121356f98b2bae119bf543dfd1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa0009121356f98b2bae119bf543dfd1d">&#9670;&nbsp;</a></span>assembleSystem_Diff()</h2>
+<a id="a1405c7ad7e3955d3bd148c61371895c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1405c7ad7e3955d3bd148c61371895c1">&#9670;&nbsp;</a></span>assembleSystem_Diff()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,43 +124,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">const Vec &amp;&#160;</td>
           <td class="paramname"><em>xe</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const real&#160;</td>
           <td class="paramname"><em>q0</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const real&#160;</td>
           <td class="paramname"><em>fL</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const real&#160;</td>
           <td class="paramname"><em>k</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">const Vec &amp;&#160;</td>
           <td class="paramname"><em>s</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramtype">Mat &amp;&#160;</td>
           <td class="paramname"><em>A</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">Vec &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -185,8 +188,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1
 
 </div>
 </div>
-<a id="ae8876dcac823c13f342ef1e4c0f8291d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8876dcac823c13f342ef1e4c0f8291d">&#9670;&nbsp;</a></span>assembleSystem_Helm()</h2>
+<a id="a66b25aa5e5581b4f7b455e7d6211ccf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66b25aa5e5581b4f7b455e7d6211ccf5">&#9670;&nbsp;</a></span>assembleSystem_Helm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,43 +203,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">const Vec &amp;&#160;</td>
           <td class="paramname"><em>xe</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const real&#160;</td>
           <td class="paramname"><em>q0</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const real&#160;</td>
           <td class="paramname"><em>fL</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const real&#160;</td>
           <td class="paramname"><em>k</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const real&#160;</td>
           <td class="paramname"><em>alpha</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramtype">Mat &amp;&#160;</td>
           <td class="paramname"><em>A</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">Vec &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -264,8 +267,94 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1
 
 </div>
 </div>
-<a id="a2774d95f9e71fe0404d6a4eadbdaa48d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2774d95f9e71fe0404d6a4eadbdaa48d">&#9670;&nbsp;</a></span>calcSrc()</h2>
+<a id="a893494efd071d1be85efbe2803a220ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a893494efd071d1be85efbe2803a220ab">&#9670;&nbsp;</a></span>assembleSystem_QuadElm_Diff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void assembleSystem_QuadElm_Diff </td>
+          <td>(</td>
+          <td class="paramtype">const std::size_t&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vec &amp;&#160;</td>
+          <td class="paramname"><em>xe</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const real&#160;</td>
+          <td class="paramname"><em>beta</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const real&#160;</td>
+          <td class="paramname"><em>q0</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const real&#160;</td>
+          <td class="paramname"><em>fL</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const real&#160;</td>
+          <td class="paramname"><em>k</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Vec &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Mat &amp;&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vec &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assembles the Finite Element Matrix A and RHS b with Quadratic Elements for the steady state diffusion (Poisson) equation <img class="formulaInl" alt="$k\frac{d^2f}{dx^2} + s(x)=0$" src="form_3.png"/> with Neumann BC <img class="formulaInl" alt="$q_0 = -k \frac{df}{dx}[x=0]$" src="form_1.png"/> and Diriclet BC <img class="formulaInl" alt="$f(x=L) = f_L$" src="form_4.png"/>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">INPUT</td><td>N Length of Interval </td></tr>
+    <tr><td class="paramname">INPUT</td><td>xe node listing </td></tr>
+    <tr><td class="paramname">INPUT</td><td><img class="formulaInl" alt="$\Beta$" src="form_7.png"/> Location of center node (0 = midpoint) </td></tr>
+    <tr><td class="paramname">INPUT</td><td>q0 BC parameter </td></tr>
+    <tr><td class="paramname">INPUT</td><td>fL BC parameter </td></tr>
+    <tr><td class="paramname">INPUT</td><td>k BC parameter </td></tr>
+    <tr><td class="paramname">INPUT</td><td>s Src Vector </td></tr>
+    <tr><td class="paramname">OUTPUT</td><td>A FEM Matrix </td></tr>
+    <tr><td class="paramname">OUTPUT</td><td>b FEM Src </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab835526179ddc8dd63062412e0e11200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab835526179ddc8dd63062412e0e11200">&#9670;&nbsp;</a></span>calcSrc()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -279,13 +368,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">Vec &amp;&#160;</td>
           <td class="paramname"><em>src</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">const Vec &amp;&#160;</td>
           <td class="paramname"><em>xe</em>&#160;</td>
         </tr>
         <tr>
@@ -307,8 +396,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1
 
 </div>
 </div>
-<a id="aa5810e457393721c67247ee414d15fae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5810e457393721c67247ee414d15fae">&#9670;&nbsp;</a></span>elm_line1()</h2>
+<a id="ab791654ef295fe4aebed535f2c54c7a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab791654ef295fe4aebed535f2c54c7a5">&#9670;&nbsp;</a></span>elm_line1()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -334,13 +423,13 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="fem1
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const double&#160;</td>
+          <td class="paramtype">const real&#160;</td>
           <td class="paramname"><em>ratio</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Eigen::VectorXd &amp;&#160;</td>
+          <td class="paramtype">Vec &amp;&#160;</td>
           <td class="paramname"><em>xe</em>&#160;</td>
         </tr>
         <tr>

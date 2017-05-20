@@ -27,6 +27,7 @@
 *.out
 *.app
 build
+doc
 
 *.swp
 *.swm

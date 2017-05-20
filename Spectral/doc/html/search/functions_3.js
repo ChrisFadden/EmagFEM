@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['test_5ffem1d_5fdiff',['test_fem1d_Diff',['../fem1d_8h.html#a0b95a2a1915189c8b3aae063cdbfd3c7',1,'fem1d.h']]],
-  ['test_5ffem1d_5fhelm',['test_fem1d_Helm',['../fem1d_8h.html#a2d7c919e32f9439e23783c1add8c385d',1,'fem1d.h']]],
-  ['test_5ffem1d_5fquadelm_5fdiff',['test_fem1d_QuadElm_Diff',['../fem1d_8h.html#a87c14fd535ef846951cecc6f7cb3bd47',1,'fem1d.h']]]
+  ['elm_5fline1',['elm_line1',['../fem1d_8h.html#ab791654ef295fe4aebed535f2c54c7a5',1,'elm_line1(const node x1, const node x2, const std::size_t N, const real ratio, Vec &amp;xe):&#160;fem1d.h'],['../spec1d_8h.html#a8ee9b0367b3b6d305b276791287e31a6',1,'elm_line1(const real x1, const real x2, const std::size_t N, const real ratio, Vec &amp;xe):&#160;spec1d.h']]]
 ];

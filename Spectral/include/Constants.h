@@ -10,7 +10,7 @@
 #ifdef DBGMODE
 #define DEBUG(x)                                                               \
   do {                                                                         \
-    std::cout << #x << ":" << x << std::endl;                                  \
+    std::cout << #x << ":" << std::endl << x << std::endl;                     \
   } while (0);
 #else
 #define DEBUG(x)
